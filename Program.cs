@@ -1,49 +1,63 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
+using Unit4.CollectionsLib;
 
-namespace NarutoEP
+namespace ConsoleApp1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.Clear();
-            First();
-            void First()
+            Random r = new Random();
+            Node<int> lst = new Node<int>(5);
+            int numOfNodes = count(lst);
+
+        }
+        
+        static bool checkIfThree(Node<int> node)
+        {
+            
+            if (count(node) % 3 == 0 && count(node) > 0)
             {
-                Console.Title = "Naruto :))))))";
-                Misc.appName();
-                Misc.tAnimation(" Please press a key...");
-                Console.WriteLine("");
-                Misc.option("Netflix Filler Episodes");
-                Misc.option("Other Filler Episodes (Episodes 1 - 400)");
-                var keyPressed = Console.ReadKey();
-                switch (keyPressed.Key)
+                int numberOfG = count(node) / 3;
+                int[] fArry = new int[numberOfG];
+                int[] sArry = new int[numberOfG];
+                int[] tArry = new int[numberOfG];
+                for (int i = 0; i < numberOfG; i++)
                 {
-                    case ConsoleKey.D1:
-                        FillerCheck.NetflixSeasonCheck();
-                        break;
-                    case ConsoleKey.D2:
-                        FillerCheck.RegularNar();
-                        break;
-
+                    fArry[i] = node.GetInfo();
+                    node = node.GetNext();
                 }
-                if (keyPressed.Key != ConsoleKey.D1 && keyPressed.Key != ConsoleKey.D2)
+                for (int i = 0; i < numberOfG; i++)
                 {
-                    Console.Clear();
-                    Misc.appName();
-                    Misc.text("Wrong key try again in 5 sec");
-                    Thread.Sleep(5000);
-                    First();
+                    sArry[i] = node.GetInfo();
+                    node = node.GetNext();
                 }
+                for (int i = 0; i < numberOfG; i++)
+                {
+                    tArry[i] = node.GetInfo();
+                    node = node.GetNext();
+                }
+                
             }
+            else
+            {
+                return false;
+            }
+        }
+        static int count(Node<int> node)
+        {
+            int count = 0;
+            while (node != null)
+            {
+                count++;
+            }
+            return count;
+        }
 
-
-        } 
 
     }
 }
