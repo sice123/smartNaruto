@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,34 +14,32 @@ namespace ConsoleApp1
             Random r = new Random();
             Node<int> lst = new Node<int>(5);
             int numOfNodes = count(lst);
-
+            if (checkIfThree(lst) == true)
+            {
+                Console.WriteLine("true");
+            }
+            else
+            {
+                Console.WriteLine("false");
+            }
         }
-        
+
         static bool checkIfThree(Node<int> node)
         {
-            
+
             if (count(node) % 3 == 0 && count(node) > 0)
             {
                 int numberOfG = count(node) / 3;
                 int[] fArry = new int[numberOfG];
                 int[] sArry = new int[numberOfG];
                 int[] tArry = new int[numberOfG];
-                for (int i = 0; i < numberOfG; i++)
+                mArry(node, fArry, sArry, tArry, numberOfG);
+                if (checkArrys(fArry , sArry , tArry) == true)
                 {
-                    fArry[i] = node.GetInfo();
-                    node = node.GetNext();
+                    return true;
                 }
-                for (int i = 0; i < numberOfG; i++)
-                {
-                    sArry[i] = node.GetInfo();
-                    node = node.GetNext();
-                }
-                for (int i = 0; i < numberOfG; i++)
-                {
-                    tArry[i] = node.GetInfo();
-                    node = node.GetNext();
-                }
-                
+                return false;
+
             }
             else
             {
@@ -56,6 +54,35 @@ namespace ConsoleApp1
                 count++;
             }
             return count;
+        }
+        static void mArry(Node<int> node , int[] fArry , int[] sArry , int[] tArry , int numberOfG)
+        {
+            for (int i = 0; i < numberOfG; i++)
+            {
+                fArry[i] = node.GetInfo();
+                node = node.GetNext();
+            }
+            for (int i = 0; i < numberOfG; i++)
+            {
+                sArry[i] = node.GetInfo();
+                node = node.GetNext();
+            }
+            for (int i = 0; i < numberOfG; i++)
+            {
+                tArry[i] = node.GetInfo();
+                node = node.GetNext();
+            }
+        }
+        static bool checkArrys(int[] fArry , int[] sArry , int[] tArry)
+        {
+            for (int i = 0; i < fArry.Length; i++)
+            {
+                if (fArry[i] != sArry[i] || tArry[i] != fArry[i] || sArry[i] != fArry[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
 
