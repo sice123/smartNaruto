@@ -13,15 +13,9 @@ namespace ConsoleApp1
         {
             Random r = new Random();
             Node<int> lst = new Node<int>(5);
+            setNodes(lst);
             int numOfNodes = count(lst);
-            if (checkIfThree(lst) == true)
-            {
-                Console.WriteLine("true");
-            }
-            else
-            {
-                Console.WriteLine("false");
-            }
+            checkIfThree(lst);
         }
 
         static bool checkIfThree(Node<int> node)
@@ -83,6 +77,16 @@ namespace ConsoleApp1
                 }
             }
             return true;
+        }
+        static void setNodes(Node<int> node)
+        {
+            Random r = new Random();
+            Node<int> newNode = new Node<int>(r.Next(1,5));
+            while (node != null)
+            {
+                node = newNode;
+            }
+            node = node.GetNext();
         }
 
 
